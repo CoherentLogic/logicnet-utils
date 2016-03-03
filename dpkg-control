@@ -1,0 +1,15 @@
+Source: logicnet-utils
+Section: net
+Priority: extra
+Maintainer: John P. Willis <jpw@coherent-logic.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: https://github.com/CoherentLogic/logicnet-utils
+Vcs-Git: https://github.com/CoherentLogic/logicnet-utils.git
+Vcs-Browser: https://github.com/CoherentLogic/logicnet-utils
+
+Package: logicnet-utils
+Architecture: all
+Depends: ${misc:Depends}, prips
+Description: CLD network management tools
+ Tools for managing and monitoring a network

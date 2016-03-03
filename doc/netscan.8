@@ -1,0 +1,26 @@
+.\" logicnet-utils
+.\" Contact jpw@coherent-logic.com
+.TH man 8 "3 March 2016" ".8" "netscan"
+.SH NAME
+\fBnetscan\fP- Run a utility for all IP addresses in a CIDR block
+
+.SH SYNOPSIS
+.B netscan cidr-block command
+
+.SH DESCRIPTION
+.B netscan
+netscan will run a command for each IP address in a specified CIDR block, appending the IP address as the last argument.
+
+.SH EXAMPLE
+ping every host with one ICMP packet in 192.168.0.0/24:
+
+.RS
+ \fBnetscan 192.168.0.0/24 ping -c 1\fP
+.RE
+
+.SH BUGS
+.P
+ \fBnetscan\fP will currently run the command for the broadcast and network addresses as well as each host. This may or may not be desirable.
+
+.SH AUTHORS
+ John P. Willis <jpw@coherent-logic.com>
