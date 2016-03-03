@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# 
+# netscan
+# 
+#  runs a network utility for a specific range of IP addresses
+#
+#  John Willis <jpw@coherent-logic.com>
+#
+#  Copyright (C) 2016 Coherent Logic Development LLC
+#  All rights reserved.
+#
+#  This file is part of netscan.
+#  
+#  netscan is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#  
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
+#  
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+CMD=`basename $0`
+
+which prips > /dev/null 2>&1
+if [ "$?" -ne 0 ]; then
+    echo "${CMD} requires the prips utility."
+    exit 1
+fi
+
+if [ "$#" -lt 2 ]; then
+    echo "usage: ${CMD} cidr-block command" 
+    exit 2
+fi
+
+CIDRBLOCK=$1
+
+ADDRESSES=`prips $1`
+UTIL=${@:2}
+
+echo "Running ${UTIL} against ${CIDRBLOCK}..."
+echo
+echo
+
+for ADDRESS in ${ADDRESSES}
+do
+    TCMD="${UTIL} ${ADDRESS}"
+    echo "[ ${TCMD} ]"
+    echo
+    ${TCMD}
+    echo
+done
+
+
+
